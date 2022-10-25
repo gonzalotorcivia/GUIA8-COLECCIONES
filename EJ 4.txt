@@ -1,0 +1,153 @@
+                                                    ATRIBUTOS
+ private String Titulo;   
+ private String Director;
+ private Double Duracion;
+
+    public Pelicula() {
+    }
+
+    public Pelicula(String Titulo, String Director, Double Duracion) {
+        this.Titulo = Titulo;
+        this.Director = Director;
+        this.Duracion = Duracion;
+    }
+
+    public String getTitulo() {
+        return Titulo;
+    }
+
+    public void setTitulo(String Titulo) {
+        this.Titulo = Titulo;
+    }
+
+    public String getDirector() {
+        return Director;
+    }
+
+    public void setDirector(String Director) {
+        this.Director = Director;
+    }
+
+    public Double getDuracion() {
+        return Duracion;
+    }
+
+    public void setDuracion(Double Duracion) {
+        this.Duracion =  Duracion;
+    }
+
+    @Override
+    public String toString() {
+        return "Pelicula{" + "Titulo=" + Titulo + ", Director=" + Director + ", Duracion=" + Duracion + '}';
+    }
+  public static Comparator<Pelicula> OrdenaTitulo= new Comparator<Pelicula>(){
+        @Override
+        public int compare(Pelicula objeto1, Pelicula objeto2){
+        return objeto1.getTitulo().compareTo(objeto2.getTitulo());
+               
+        } 
+        public void ordenaTitulo(){
+             
+        }
+      
+    };
+ public static Comparator<Pelicula> ComparaPeliculas= new Comparator<Pelicula>(){
+        @Override
+        public int compare(Pelicula objeto1, Pelicula objeto2){
+        return objeto1.getDuracion().compareTo(objeto2.getDuracion());
+               
+        } 
+        
+    };
+    //de menor a mayor
+     public static Comparator<Pelicula> ComparaPeli= new Comparator<Pelicula>(){
+        @Override
+        public int compare(Pelicula objeto1, Pelicula objeto2){
+        return objeto2.getDuracion().compareTo(objeto1.getDuracion());
+               
+        } 
+        
+    };
+     public static Comparator<Pelicula> Comparadirector= new Comparator<Pelicula>(){
+        @Override
+        public int compare(Pelicula objeto1, Pelicula objeto2){
+        return objeto1.getDirector().compareTo(objeto2.getDirector());
+               
+        } 
+        
+    };
+}
+
+
+                                                               METODOS
+
+import EntidadPelicula.Pelicula;
+import java.util.ArrayList;
+//import java.util.Comparator;
+import java.util.Scanner;
+
+public class MetodosPelicula {
+    Scanner leer=new Scanner(System.in).useDelimiter("\n");
+    ArrayList<Pelicula> peli= new ArrayList(); 
+    Pelicula t = new Pelicula();
+   String opciones;
+    public void CreaPeli(){
+        do{
+        System.out.println("ingrese, por favor, el titulo de la pelicula"); 
+         t.setTitulo(leer.next());
+        System.out.println("ingrese, por favor, el director de la pelicula");
+        t.setDirector(leer.next());
+        System.out.println("ingrese,en horas, la duracion de la pelicula");
+        t.setDuracion(leer.nextDouble());
+        System.out.println("desea agregar mas peliculas?s=si, n=no");
+        opciones=leer.next();
+        peli.add(t);
+    }while(opciones.equalsIgnoreCase("s"));
+            
+        }
+    public void MostrarPeli(){
+        for (Pelicula pelicula : peli) {
+            System.out.println("a continuacion le mostraremos las peliculas"+pelicula);
+    }
+    }
+   
+        
+    public void MostrarMayor1hs(){
+     if(t.getDuracion()>1){
+         for (Pelicula pelicula : peli) {
+             System.out.println("las peliculas mayores a 1 hs son"+pelicula);
+             
+         }
+      }   
+    }
+    public void ordenaMayorMenor(){
+        peli.sort(Pelicula.ComparaPeliculas);
+    }
+    public void ordenaMenorMayor(){
+        peli.sort(Pelicula.ComparaPeli);  
+    }
+    public void OrdenarTitulo(){
+         peli.sort(Pelicula.OrdenaTitulo);
+     }
+     public void Ordenardirector(){
+         peli.sort(Pelicula.Comparadirector);
+    }
+}
+
+
+                                                            MAIN
+
+  MetodosPelicula pelis=new MetodosPelicula();
+     pelis.CreaPeli();
+     pelis.MostrarPeli();
+     pelis.MostrarMayor1hs();
+     pelis.OrdenarTitulo();
+     pelis.Ordenardirector();
+     pelis.ordenaMayorMenor();
+     pelis.ordenaMenorMayor();
+    }
+    
+
+
+
+

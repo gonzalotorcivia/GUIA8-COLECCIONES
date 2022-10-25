@@ -1,0 +1,105 @@
+MAIN
+
+        ServicioPaises sp = new ServicioPaises();
+        sp.crearVariosPaises();
+        sp.mostrarPaises();
+
+ENTIDADES
+
+public class Pais implements Comparable<Pais>{
+    private String nombrePais;
+
+    public Pais() {
+    }
+
+    public Pais(String nombrePais) {
+        this.nombrePais = nombrePais;
+    }
+
+    public String getNombrePais() {
+        return nombrePais;
+    }
+
+    public void setNombrePais(String nombrePais) {
+        this.nombrePais = nombrePais;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.nombrePais);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pais other = (Pais) obj;
+        if (!Objects.equals(this.nombrePais, other.nombrePais)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Pais{" + "nombrePais=" + nombrePais + '}';
+    }
+
+    @Override
+    public int compareTo(Pais t) {
+       return this.nombrePais.compareTo(t.getNombrePais());
+    }
+        
+}
+
+SERVICIO
+
+Scanner leer = new Scanner(System.in).useDelimiter("\n").useLocale(Locale.US);
+    TreeSet<Pais> conjuntoDePaises = new TreeSet();
+
+    public Pais crearPais() {
+        System.out.println("Ingrese nombre del Pais: ");
+        String nombrePais = leer.next();
+
+        return new Pais(nombrePais);
+    }
+
+    public void agregarPais(Pais p) {
+        conjuntoDePaises.add(p);
+    }
+
+    public void crearVariosPaises() {
+        String opcion;
+
+        do {
+            Pais r = crearPais();
+            agregarPais(r);
+            System.out.println(r.toString());
+            System.out.println("----------------------------------------");
+            System.out.println("elija opcion");
+            System.out.println("1- Salir");
+            System.out.println("2- Agregar otro Pais");
+            System.out.println("----------------------------------------");
+
+            opcion = leer.next();
+
+        } while (!opcion.equals("1"));
+    }
+    
+     public void mostrarPaises() {
+        System.out.println("Los Paises ingresados en el conjunto son: ");
+
+         for (Pais elemento : conjuntoDePaises) {
+             System.out.println(elemento.toString());
+         }
+        System.out.println("Cantidad: " + conjuntoDePaises.size());
+    }
